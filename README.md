@@ -114,6 +114,32 @@ const fruits = ['manzana','platano','fresa'];
 const fruitNames = ['manzana','platano','fresa'];
 ```
 
+### Booleanos
+
+Se usan prefijos como is, have, can. Se procura que su significado sea positivo y evitar las negaciones en el nombre. Una regla general es que si debo tomar unos segundos para poder determnar que tipo de dato contiene la variable, es porque es un mal nombre. 
+
+Don't ❌
+
+```
+const open = true;
+const write = = true;
+const fruit = true;
+const active = true;
+const voValues = true;
+const notEmpty = true;
+```
+
+Better 🔥
+
+```
+const isOpen = true;
+const canWrite = = true;
+const hasFruit = true;
+const isActive = true;
+const hasValues = true;
+const isEmpty = true;
+```
+
 ## Ausencia de información técnica en nombres
 
 Esto aplica principalmente para clases, interfaces, etc. Se convierte en algo redundante pues la información usualmente ya vienen en alguna de las palablas reservadas del lenguaje de programación.
