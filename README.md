@@ -4,6 +4,29 @@ Notas de clase del curso de Principios SOLID y Clean Code de Fernando Herrera en
 > "Nuestro código tiene que ser simple y directo, debería leerse con la misma facilidad que un texto bien escrito"
 > 
 > "Código limpio es el que se ha escrito con la intención de que otra persona (o tu mismo) lo entienda."
+
+- [Principios-SOLID-y-Clean-Code](#principios-solid-y-clean-code)
+- [Deuda técnica](#deuda-t-cnica)
+  * [Esquema de deuda técnica de Martin Fowler](#esquema-de-deuda-t-cnica-de-martin-fowler)
+    + [Imprudente](#imprudente)
+    + [Imprudente + Inadvertida](#imprudente---inadvertida)
+    + [Prudente](#prudente)
+    + [Prudente e inadvertida](#prudente-e-inadvertida)
+- [Refactorización](#refactorizaci-n)
+- [Clean Code](#clean-code)
+  * [Nombres pronunciables y expresivos](#nombres-pronunciables-y-expresivos)
+    + [Ejercicio](#ejercicio)
+      - [Solución](#soluci-n)
+  * [Nombre según el tipo de dato](#nombre-seg-n-el-tipo-de-dato)
+    + [Arreglos](#arreglos)
+    + [Booleanos](#booleanos)
+    + [Números](#n-meros)
+    + [Números](#n-meros-1)
+    + [Ejercicio](#ejercicio-1)
+      - [Solución](#soluci-n-1)
+  * [Ausencia de información técnica en nombres](#ausencia-de-informaci-n-t-cnica-en-nombres)
+
+
 # Deuda técnica
 
 Falta de calidad en alguna parte de del código de nuestra aplicación. Esto genera un costo económico a futuro, que termina pagándose con mas tiempo invertido tratando de comprender el codigo, refactorizarlos, transferencia del código y solucionar los problemas generados en etapas mas tempranas del desarrollo. 
