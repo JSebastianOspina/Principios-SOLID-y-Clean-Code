@@ -34,16 +34,93 @@ Pasa inadvertida hasta el final del desarrollo de la codificación del proyecto.
 
 Proceso que tiene como objetivo mejorar el código sin alterar su comportamiento para que sea mas entendible y tolerante a cambios. Usualmente es **imprescindible contar con pruebas automáticas**. 
 
-# Nombres pronunciables y expresivos
+# Clean Code
+
+Si aparece la necesidad de comentar algo antes de la siguiente linea de código para explicar su funcionamiento, esto significa que esa línea de código realmente no está lo suficientemente clara.
+
+## Nombres pronunciables y expresivos
 
 Se prioriza el uso de camelCase o UpperCamelCase. Estos deben ser lo necesariamente largos (y cortos al mismo tiempo) como para entender cual es la función de la variable y que almacena.
 
-# Ausencia de información técnica en nombres
+### Ejercicio
+
+Cambiar el nombre de estas variables por nombres mas descriptivos.
+
+```
+//día de hoy - today
+const ddmmyyyy = new Date();
+
+//dias transcurridos en días
+const d: number = 23;
+ 
+//número de archivos en un directorio
+const dir = 33;
+
+// primer nombre - first name
+const nombre = 'Fernando';
+ 
+// primer apellido - last name
+const apellido = 'Herrera';
+
+// días desde la última modificación - days since modification
+const dsm = 12;
+
+// cantidad máxima de clases por estudiante - max classes per student
+const max = 6
+```
+
+#### Solución
+
+```
+//día de hoy - today
+const today = new Date();
+
+//dias transcurridos en días
+const elapsedDays: number = 23;
+ 
+//número de archivos en un directorio
+const numberOfFilesInDirectory = 33;
+
+// primer nombre - first name
+const firstName = 'Fernando';
+ 
+// primer apellido - last name
+const lastName = 'Herrera';
+
+// días desde la última modificación - days since modification
+const daysSinceLastModification = 12;
+
+// cantidad máxima de clases por estudiante - max classes per student
+const maxSClassesPerStudent = 6
+```
+
+## Nombre según el tipo de dato
+
+### Arreglos
+
+Debido a que contienen usualmente varios elementos, es común elegir nombres en plural.
+
+```
+// malo
+const fruit = ['manzana','platano','fresa'];
+
+// regular 
+const fruitList = ['manzana','platano','fresa'];
+
+// bueno
+const fruits = ['manzana','platano','fresa'];
+
+//mejor (ya que en este caso, son solo strings. Si el arreglo fuese de objetos de tipo Fruta, el mejor nombre sería el anterior)
+const fruitNames = ['manzana','platano','fresa'];
+```
+
+## Ausencia de información técnica en nombres
 
 Esto aplica principalmente para clases, interfaces, etc. Se convierte en algo redundante pues la información usualmente ya vienen en alguna de las palablas reservadas del lenguaje de programación.
 Don't ❌
 
 >class UserClass{}
+>
 >interface UserInterface{}
 
 Better 🔥
