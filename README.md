@@ -116,7 +116,6 @@ const daysSinceLastModification = 12;
 // cantidad máxima de clases por estudiante - max classes per student
 const maxSClassesPerStudent = 6
 ```
-
 ## Nombre según el tipo de dato
 
 ### Arreglos
@@ -312,6 +311,32 @@ function printJob() {
 throw new Error('Function not implemented.');
 }
 ```
+
+### Nombres de las clases
+
+Las clases deben tener nombes formados por sustantivos o frases de sustantivo. Se debe evitar **nombres genéricos para evitar que las clases realicen mas trabajo del que deberían hacer**. El nombre es lo mas importante de la clase. Se usa UpperCamelCase
+
+Don't ❌
+
+```
+class Manager{};
+class Data{};
+class Info{};
+class Individual{};
+class Processor{};
+```
+
+Tampoco exagerar en la especificidad del nombre
+
+```
+class SpecialViewingCaseMonsterManagerEventsHandlerActivitySingleton{};
+```
+
+#### 3 preguntas para saber si es un buen nombre
+- ¿Qué hace exactamene la clase?
+- ¿Como exactamente esta clase realiza cierta tarea?
+- ¿Hay algo específico sobre su ubicación?
+
 
 ## Ausencia de información técnica en nombres
 
