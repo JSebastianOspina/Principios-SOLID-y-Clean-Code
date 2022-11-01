@@ -4,12 +4,11 @@ Notas de clase del curso de Principios SOLID y Clean Code de Fernando Herrera en
 > "Nuestro código tiene que ser simple y directo, debería leerse con la misma facilidad que un texto bien escrito"
 > 
 > "Código limpio es el que se ha escrito con la intención de que otra persona (o tu mismo) lo entienda."
-
 - [Principios-SOLID-y-Clean-Code](#principios-solid-y-clean-code)
 - [Deuda técnica](#deuda-t-cnica)
   * [Esquema de deuda técnica de Martin Fowler](#esquema-de-deuda-t-cnica-de-martin-fowler)
     + [Imprudente](#imprudente)
-    + [Imprudente + Inadvertida](#imprudente---inadvertida)
+    + [Imprudente e Inadvertida](#imprudente-e-inadvertida)
     + [Prudente](#prudente)
     + [Prudente e inadvertida](#prudente-e-inadvertida)
 - [Refactorización](#refactorizaci-n)
@@ -24,8 +23,9 @@ Notas de clase del curso de Principios SOLID y Clean Code de Fernando Herrera en
     + [Números](#n-meros-1)
     + [Ejercicio](#ejercicio-1)
       - [Solución](#soluci-n-1)
-  * [Ausencia de información técnica en nombres](#ausencia-de-informaci-n-t-cnica-en-nombres)
-
+    + [Nombres de las clases](#nombres-de-las-clases)
+      - [3 preguntas para saber si es un buen nombre](#3-preguntas-para-saber-si-es-un-buen-nombre)
+    + [Nombres de funciones, argumentos y parámetros](#nombres-de-funciones--argumentos-y-par-metros)
 
 # Deuda técnica
 
@@ -41,7 +41,7 @@ La mala calidad en el software siempre la acaba asumiendo alguien, ya sea el cli
 
 El desarrollador actua de forma consciente e imprudente, genera un rpoyecto de mala calidad y poco tolerante al cambio. "No hay tiempo, solo copia y pega eso"
 
-### Imprudente + Inadvertida 
+### Imprudente e Inadvertida 
 
 Se genera por el desconocimiento o falta de experiencia, se genera por falsos seniors y juniors.
 
@@ -336,6 +336,35 @@ class SpecialViewingCaseMonsterManagerEventsHandlerActivitySingleton{};
 - ¿Qué hace exactamene la clase?
 - ¿Como exactamente esta clase realiza cierta tarea?
 - ¿Hay algo específico sobre su ubicación?
+
+### Nombres de funciones, argumentos y parámetros
+
+> Sabemos que estamos desarrollando código limpio cuando cada función hace exactamente lo que su nombre indica
+
+Se recomienda limitar a 3 parámetros posicionales
+
+```
+//ok
+
+function sendEmail(toWhom:string,from:string,body:string):boolean{}
+
+//not ok
+function sendEmail(tohHom:string,from:string,body:string,subject:string,apikey:string):boolean{}
+
+```
+
+Se puede mejorar haciendo uso de una interfaz
+
+```
+interface SendEmailOptions {
+toWhom: string;
+from: string;
+body: string;
+subject: string;
+apiKey: string;
+}
+function sendEmail({tohHom,from,body,subject,apikey}:SendEmailOptions):boolean{}
+```
 
 
 ## Ausencia de información técnica en nombres
