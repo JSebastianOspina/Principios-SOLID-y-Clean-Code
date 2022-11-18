@@ -20,8 +20,8 @@ Notas de clase del curso de Principios SOLID y Clean Code de Fernando Herrera en
     + [Arreglos](#arreglos)
     + [Booleanos](#booleanos)
     + [Números](#n-meros)
-    + [Números](#n-meros-1)
-    + [Ejercicio](#ejercicio-1)
+    + [Funciones](#n-meros-1)
+    + [Ejercicio](#Funciones1)
       - [Solución](#soluci-n-1)
     + [Nombres de las clases](#nombres-de-las-clases)
       - [3 preguntas para saber si es un buen nombre](#3-preguntas-para-saber-si-es-un-buen-nombre)
@@ -187,7 +187,7 @@ const totalOfCars = 5;
 const numberOfCars = 5;
 ```
 
-### Números
+### Funciones
 
 Deben representar acciones, se contruyen a partir del verbo que representa la acción seguido de un sustanivo. Deben ser descriptivos y concisos, debe expesar lo que hace especificamente sin entrar en su implementación. Esto se debe a el **principio de responsabilidad única**.
 
