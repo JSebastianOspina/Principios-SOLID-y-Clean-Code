@@ -4,6 +4,8 @@ Notas de clase del curso de Principios SOLID y Clean Code de Fernando Herrera en
 > "Nuestro código tiene que ser simple y directo, debería leerse con la misma facilidad que un texto bien escrito"
 > 
 > "Código limpio es el que se ha escrito con la intención de que otra persona (o tu mismo) lo entienda."
+
+
 - [Principios-SOLID-y-Clean-Code](#principios-solid-y-clean-code)
 - [Deuda técnica](#deuda-t-cnica)
   * [Esquema de deuda técnica de Martin Fowler](#esquema-de-deuda-t-cnica-de-martin-fowler)
@@ -25,7 +27,10 @@ Notas de clase del curso de Principios SOLID y Clean Code de Fernando Herrera en
       - [Solución](#soluci-n-1)
     + [Nombres de las clases](#nombres-de-las-clases)
       - [3 preguntas para saber si es un buen nombre](#3-preguntas-para-saber-si-es-un-buen-nombre)
-    + [Nombres de funciones, argumentos y parámetros](#nombres-de-funciones--argumentos-y-par-metros)
+  * [Nombres de funciones, argumentos y parámetros](#nombres-de-funciones--argumentos-y-par-metros)
+  * [Ausencia de información técnica en nombres](#ausencia-de-informaci-n-t-cnica-en-nombres)
+    + [Ejercicio - Refactorizar funciones](#ejercicio---refactorizar-funciones)
+      - [Solución](#soluci-n-2)
 
 # Deuda técnica
 
