@@ -539,4 +539,61 @@ Tampoco exagerar en la especificidad del nombre
 class SpecialViewingCaseMonsterManagerEventsHandlerActivitySingleton{};
 ```
 
+## Principio DRY
+> Don't repeat yourself
 
+- Consiste en evitar la duplicidad de código.
+- Simplifica las pruebas
+- Ayuda a centralizar procesos
+- Aplicar el principio DRY, usualmente lleva a refactorizar.
+
+```
+type Size = '' | 'S' | 'M' | 'XL';
+
+class Product {
+    constructor(
+        public name: string = '',
+        public price: number = 0,
+        public size: Size = '',
+    ) {
+    }
+
+    badToString() {
+        //Estas validaciones deberían estar centralizadas, siempre que haya
+        // una nueva propiedad se duplica el codigo. NO DRY!!
+        if (this.name.length === 0) throw Error('Name is empty');
+        if (this.price <= 0) throw Error('Price is zero');
+        if (this.size.length === 0) throw Error('size is empty');
+        return `${this.name} (${this.price}), ${this.size}`;
+
+    }
+
+    isProductReady(): boolean {
+        for (const property in this) {
+            switch (typeof this[property]) {
+                case "string":
+                    // @ts-ignore
+                    if (this[property].length === 0) throw Error(`${property} is empty`);
+                    break;
+                case "number":
+                    // @ts-ignore
+                    if (this[property] <= 0) throw Error(`${property} is zero`);
+                    break;
+                default:
+                    throw Error(`type of ${property} is not supported`);
+            }
+        }
+        return true;
+    }
+
+    toString() {
+        if (!this.isProductReady()) return;
+        return `${this.name} (${this.price}), ${this.size}`;
+    }
+}
+
+(() => {
+    const bluePants = new Product('Pantalones', 10, 'M');
+    console.log(bluePants.toString());
+})();
+```
