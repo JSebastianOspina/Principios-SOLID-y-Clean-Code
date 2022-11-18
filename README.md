@@ -5,8 +5,6 @@ Notas de clase del curso de Principios SOLID y Clean Code de Fernando Herrera en
 > 
 > "Código limpio es el que se ha escrito con la intención de que otra persona (o tu mismo) lo entienda."
 
-
-- [Principios-SOLID-y-Clean-Code](#principios-solid-y-clean-code)
 - [Deuda técnica](#deuda-t-cnica)
   * [Esquema de deuda técnica de Martin Fowler](#esquema-de-deuda-t-cnica-de-martin-fowler)
     + [Imprudente](#imprudente)
