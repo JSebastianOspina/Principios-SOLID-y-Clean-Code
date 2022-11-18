@@ -516,6 +516,11 @@ throw new Error('Function not implemented.');
 
 Las clases deben tener nombes formados por sustantivos o frases de sustantivo. Se debe evitar **nombres genéricos para evitar que las clases realicen mas trabajo del que deberían hacer**. El nombre es lo mas importante de la clase. Se usa UpperCamelCase
 
+#### 3 preguntas para saber si es un buen nombre
+- ¿Qué hace exactamene la clase?
+- ¿Como exactamente esta clase realiza cierta tarea?
+- ¿Hay algo específico sobre su ubicación?
+
 Don't ❌
 
 ```
@@ -532,7 +537,4 @@ Tampoco exagerar en la especificidad del nombre
 class SpecialViewingCaseMonsterManagerEventsHandlerActivitySingleton{};
 ```
 
-#### 3 preguntas para saber si es un buen nombre
-- ¿Qué hace exactamene la clase?
-- ¿Como exactamente esta clase realiza cierta tarea?
-- ¿Hay algo específico sobre su ubicación?
+
