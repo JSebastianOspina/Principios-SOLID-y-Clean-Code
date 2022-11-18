@@ -476,18 +476,16 @@ Refactorizar el siguiente código para que las funciones sean mas fáciles de en
     // Simplificar esta función
     // switch? Object literal? validar posibles colores
     function getFruitsByColor(color: string): string[] {
-        const availableColors = ['red', 'yellow', 'purple'];
-        if (!availableColors.includes(color)) {
+        const fruitsByColor = {
+            'red': ['manzana', 'fresa'],
+            'yellow': ['piña', 'banana'],
+            'purple': ['moras', 'uvas']
+        }
+        if (!Object.keys(fruitsByColor).includes(color)) {
             throw Error('the color must be: red, yellow, purple');
         }
-        switch (color) {
-            case 'red':
-                return ['manzana', 'fresa'];
-            case 'yellow':
-                return ['piña', 'banana'];
-            case'purple':
-                return ['moras', 'uvas']
-        }
+        // @ts-ignore
+        return fruitsByColor[color];
     }
 
     // Simplificar esta función
@@ -512,6 +510,7 @@ Refactorizar el siguiente código para que las funciones sean mas fáciles de en
     ]
 
     function workingSteps() {
+        // @ts-ignore
         stepsStatus.forEach(function (step) {
             if (!step.status) {
                 return `${step.name} is broken`;
@@ -533,9 +532,5 @@ Refactorizar el siguiente código para que las funciones sean mas fáciles de en
 
     // workingSteps
     console.log({workingSteps: workingSteps()}); // Cambiar los valores de la línea 31 y esperar los resultados
-    
 })();
 ```
-
-
-
