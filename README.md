@@ -119,6 +119,22 @@ const daysSinceLastModification = 12;
 // cantidad máxima de clases por estudiante - max classes per student
 const maxSClassesPerStudent = 6
 ```
+
+## Ausencia de información técnica en nombres
+
+Esto aplica principalmente para clases, interfaces, etc. Se convierte en algo redundante pues la información usualmente ya vienen en alguna de las palablas reservadas del lenguaje de programación.
+Don't ❌
+
+>class UserClass{}
+>
+>interface UserInterface{}
+
+Better 🔥
+
+>class User{}
+>
+>interface User{}
+
 ## Nombre según el tipo de dato
 
 ### Arreglos
@@ -189,8 +205,34 @@ const numberOfCars = 5;
 
 ### Funciones
 
+> Sabemos que estamos desarrollando código limpio cuando cada función hace exactamente lo que su nombre indica
+
 Deben representar acciones, se contruyen a partir del verbo que representa la acción seguido de un sustanivo. Deben ser descriptivos y concisos, debe expesar lo que hace especificamente sin entrar en su implementación. Esto se debe a el **principio de responsabilidad única**.
 
+Se recomienda limitar a 3 parámetros posicionales
+
+```
+//ok
+
+function sendEmail(toWhom:string,from:string,body:string):boolean{}
+
+//not ok
+function sendEmail(tohHom:string,from:string,body:string,subject:string,apikey:string):boolean{}
+
+```
+
+Se puede mejorar haciendo uso de una interfaz
+
+```
+interface SendEmailOptions {
+toWhom: string;
+from: string;
+body: string;
+subject: string;
+apiKey: string;
+}
+function sendEmail({tohHom,from,body,subject,apikey}:SendEmailOptions):boolean{}
+```
 
 Don't ❌
 
@@ -206,6 +248,161 @@ Better 🔥
 createUser();
 updateUser();
 sendEmail();
+```
+
+#### Ejercicio - Refactorizar funciones
+
+Refactorizar el siguiente código para que las funciones sean mas fáciles de entender. El resultado debe ser el mismo antes y despues de la refactorización.
+```
+(() => {
+
+
+    // Resolver sin la triple condicional dentro del if
+    // includes? arrays?
+    function isRedFruit( fruit: string ): boolean {
+        
+        if ( fruit === 'manzana' || fruit === 'cereza' || fruit === 'ciruela' ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Simplificar esta función
+    // switch? Object literal? validar posibles colores
+    function getFruitsByColor( color: string ): string[] {
+
+        if ( color === 'red' ) {
+            return ['manzana','fresa'];
+        } else if ( color === 'yellow') {
+            return ['piña','banana'];
+        } else if ( color === 'purple') {
+            return ['moras','uvas']
+        } else {
+            throw Error('the color must be: red, yellow, purple');
+        }
+    }
+
+    // Simplificar esta función
+    let isFirstStepWorking  = true;
+    let isSecondStepWorking = true;
+    let isThirdStepWorking  = true;
+    let isFourthStepWorking = true;
+
+    function workingSteps() {
+        if( isFirstStepWorking === true ) {
+            if( isSecondStepWorking === true ) {
+                if( isThirdStepWorking === true ) {
+                    if( isFourthStepWorking === true ) {
+                        return 'Working properly!';
+                    }
+                    else {
+                        return 'Fourth step broken.';
+                    }
+                }
+                else {
+                    return 'Third step broken.';
+                }
+            }
+            else {
+                return 'Second step broken.';
+            }
+        }
+        else {
+            return 'First step broken.';
+        }
+    }
+
+
+    // isRedFruit
+    console.log({ isRedFruit: isRedFruit('cereza'), fruit: 'cereza' }); // true
+    console.log({ isRedFruit: isRedFruit('piña'), fruit: 'piña' }); // true
+
+    //getFruitsByColor
+    console.log({ redFruits: getFruitsByColor('red') }); // ['manzana', 'fresa']
+    console.log({ yellowFruits: getFruitsByColor('yellow') }); // ['piña', 'banana']
+    console.log({ purpleFruits: getFruitsByColor('purple') }); // ['moras', 'uvas']
+    // console.log({ pinkFruits: getFruitsByColor('pink') }); // Error: the color must be: red, yellow, purple
+
+    // workingSteps
+    console.log({ workingSteps: workingSteps() }); // Cambiar los valores de la línea 31 y esperar los resultados
+
+
+})();
+```
+
+##### Solución
+
+```
+(() => {
+
+    // Resolver sin la triple condicional dentro del if
+    // includes? arrays?
+    function isRedFruit(fruit: string): boolean {
+        const redFruits = ['manzana', 'cereza', 'ciruela'];
+        return redFruits.includes(fruit);
+    }
+
+    // Simplificar esta función
+    // switch? Object literal? validar posibles colores
+    function getFruitsByColor(color: string): string[] {
+        const fruitsByColor = {
+            'red': ['manzana', 'fresa'],
+            'yellow': ['piña', 'banana'],
+            'purple': ['moras', 'uvas']
+        }
+        if (!Object.keys(fruitsByColor).includes(color)) {
+            throw Error('the color must be: red, yellow, purple');
+        }
+        // @ts-ignore
+        return fruitsByColor[color];
+    }
+
+    // Simplificar esta función
+
+    let stepsStatus = [
+        {
+            name: 'first step',
+            status: true
+        },
+        {
+            name: 'second step',
+            status: true
+        },
+        {
+            name: 'third step',
+            status: true
+        },
+        {
+            name: 'fourth step',
+            status: true
+        },
+    ]
+
+    function workingSteps() {
+        // @ts-ignore
+        stepsStatus.forEach(function (step) {
+            if (!step.status) {
+                return `${step.name} is broken`;
+            }
+        });
+        return 'Working properly'
+    }
+
+
+    // isRedFruit
+    console.log({isRedFruit: isRedFruit('cereza'), fruit: 'cereza'}); // true
+    console.log({isRedFruit: isRedFruit('piña'), fruit: 'piña'}); // true
+
+    //getFruitsByColor
+    console.log({redFruits: getFruitsByColor('red')}); // ['manzana', 'fresa']
+    console.log({yellowFruits: getFruitsByColor('yellow')}); // ['piña', 'banana']
+    console.log({purpleFruits: getFruitsByColor('purple')}); // ['moras', 'uvas']
+    // console.log({ pinkFruits: getFruitsByColor('pink') }); // Error: the color must be: red, yellow, purple
+
+    // workingSteps
+    console.log({workingSteps: workingSteps()}); // Cambiar los valores de la línea 31 y esperar los resultados
+})();
 ```
 
 ### Ejercicio
@@ -339,201 +536,3 @@ class SpecialViewingCaseMonsterManagerEventsHandlerActivitySingleton{};
 - ¿Qué hace exactamene la clase?
 - ¿Como exactamente esta clase realiza cierta tarea?
 - ¿Hay algo específico sobre su ubicación?
-
-## Nombres de funciones, argumentos y parámetros
-
-> Sabemos que estamos desarrollando código limpio cuando cada función hace exactamente lo que su nombre indica
-
-Se recomienda limitar a 3 parámetros posicionales
-
-```
-//ok
-
-function sendEmail(toWhom:string,from:string,body:string):boolean{}
-
-//not ok
-function sendEmail(tohHom:string,from:string,body:string,subject:string,apikey:string):boolean{}
-
-```
-
-Se puede mejorar haciendo uso de una interfaz
-
-```
-interface SendEmailOptions {
-toWhom: string;
-from: string;
-body: string;
-subject: string;
-apiKey: string;
-}
-function sendEmail({tohHom,from,body,subject,apikey}:SendEmailOptions):boolean{}
-```
-
-
-## Ausencia de información técnica en nombres
-
-Esto aplica principalmente para clases, interfaces, etc. Se convierte en algo redundante pues la información usualmente ya vienen en alguna de las palablas reservadas del lenguaje de programación.
-Don't ❌
-
->class UserClass{}
->
->interface UserInterface{}
-
-Better 🔥
-
->class User{}
->
->interface User{}
-
-### Ejercicio - Refactorizar funciones
-
-Refactorizar el siguiente código para que las funciones sean mas fáciles de entender. El resultado debe ser el mismo antes y despues de la refactorización.
-```
-(() => {
-
-
-    // Resolver sin la triple condicional dentro del if
-    // includes? arrays?
-    function isRedFruit( fruit: string ): boolean {
-        
-        if ( fruit === 'manzana' || fruit === 'cereza' || fruit === 'ciruela' ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // Simplificar esta función
-    // switch? Object literal? validar posibles colores
-    function getFruitsByColor( color: string ): string[] {
-
-        if ( color === 'red' ) {
-            return ['manzana','fresa'];
-        } else if ( color === 'yellow') {
-            return ['piña','banana'];
-        } else if ( color === 'purple') {
-            return ['moras','uvas']
-        } else {
-            throw Error('the color must be: red, yellow, purple');
-        }
-    }
-
-    // Simplificar esta función
-    let isFirstStepWorking  = true;
-    let isSecondStepWorking = true;
-    let isThirdStepWorking  = true;
-    let isFourthStepWorking = true;
-
-    function workingSteps() {
-        if( isFirstStepWorking === true ) {
-            if( isSecondStepWorking === true ) {
-                if( isThirdStepWorking === true ) {
-                    if( isFourthStepWorking === true ) {
-                        return 'Working properly!';
-                    }
-                    else {
-                        return 'Fourth step broken.';
-                    }
-                }
-                else {
-                    return 'Third step broken.';
-                }
-            }
-            else {
-                return 'Second step broken.';
-            }
-        }
-        else {
-            return 'First step broken.';
-        }
-    }
-
-
-    // isRedFruit
-    console.log({ isRedFruit: isRedFruit('cereza'), fruit: 'cereza' }); // true
-    console.log({ isRedFruit: isRedFruit('piña'), fruit: 'piña' }); // true
-
-    //getFruitsByColor
-    console.log({ redFruits: getFruitsByColor('red') }); // ['manzana', 'fresa']
-    console.log({ yellowFruits: getFruitsByColor('yellow') }); // ['piña', 'banana']
-    console.log({ purpleFruits: getFruitsByColor('purple') }); // ['moras', 'uvas']
-    // console.log({ pinkFruits: getFruitsByColor('pink') }); // Error: the color must be: red, yellow, purple
-
-    // workingSteps
-    console.log({ workingSteps: workingSteps() }); // Cambiar los valores de la línea 31 y esperar los resultados
-
-
-})();
-```
-#### Solución
-```
-(() => {
-
-    // Resolver sin la triple condicional dentro del if
-    // includes? arrays?
-    function isRedFruit(fruit: string): boolean {
-        const redFruits = ['manzana', 'cereza', 'ciruela'];
-        return redFruits.includes(fruit);
-    }
-
-    // Simplificar esta función
-    // switch? Object literal? validar posibles colores
-    function getFruitsByColor(color: string): string[] {
-        const fruitsByColor = {
-            'red': ['manzana', 'fresa'],
-            'yellow': ['piña', 'banana'],
-            'purple': ['moras', 'uvas']
-        }
-        if (!Object.keys(fruitsByColor).includes(color)) {
-            throw Error('the color must be: red, yellow, purple');
-        }
-        // @ts-ignore
-        return fruitsByColor[color];
-    }
-
-    // Simplificar esta función
-
-    let stepsStatus = [
-        {
-            name: 'first step',
-            status: true
-        },
-        {
-            name: 'second step',
-            status: true
-        },
-        {
-            name: 'third step',
-            status: true
-        },
-        {
-            name: 'fourth step',
-            status: true
-        },
-    ]
-
-    function workingSteps() {
-        // @ts-ignore
-        stepsStatus.forEach(function (step) {
-            if (!step.status) {
-                return `${step.name} is broken`;
-            }
-        });
-        return 'Working properly'
-    }
-
-
-    // isRedFruit
-    console.log({isRedFruit: isRedFruit('cereza'), fruit: 'cereza'}); // true
-    console.log({isRedFruit: isRedFruit('piña'), fruit: 'piña'}); // true
-
-    //getFruitsByColor
-    console.log({redFruits: getFruitsByColor('red')}); // ['manzana', 'fresa']
-    console.log({yellowFruits: getFruitsByColor('yellow')}); // ['piña', 'banana']
-    console.log({purpleFruits: getFruitsByColor('purple')}); // ['moras', 'uvas']
-    // console.log({ pinkFruits: getFruitsByColor('pink') }); // Error: the color must be: red, yellow, purple
-
-    // workingSteps
-    console.log({workingSteps: workingSteps()}); // Cambiar los valores de la línea 31 y esperar los resultados
-})();
-```
