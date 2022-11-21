@@ -597,3 +597,7 @@ class Product {
     console.log(bluePants.toString());
 })();
 ```
+
+## Clases
+
+Si
