@@ -600,4 +600,75 @@ class Product {
 
 ## Clases
 
-Si
+### Herencia
+
+Es dificil cumplir con el principio de responsabilidad única cuando una clase hereda de otra, pues se vuelve ahora una nueva responsabilidad de la clase poder instanciar a su padre através de la palabra clave super. A continuación un ejemplo en typescript que muestra como la herencia termina generando un constructor de gran tamaño para las clases hijo. 
+
+```
+(() => {
+    type Gender = 'M' | 'F';
+
+    class Person {
+        public name: string;
+        public gender: Gender;
+        public birthdate: Date;
+
+        constructor(name: string, gender: Gender, birthdate: Date) {
+            this.name = name;
+            this.gender = gender;
+            this.birthdate = birthdate;
+        }
+    }
+
+    class User extends Person {
+        public lastAccess: Date;
+
+        constructor(
+            public email: string,
+            public role: string,
+            name: string,
+            gender: Gender,
+            birthdate: Date
+        ) {
+            super(name, gender, birthdate);
+            this.lastAccess = new Date();
+        }
+
+        checkCredentials() {
+            return true;
+        }
+
+    }
+
+    class UserSettings extends User {
+        constructor(
+            public workingDirectory: string,
+            public lastOpenFolder: string,
+            email: string,
+            role: string,
+            name: string,
+            gender: Gender,
+            birthdate: Date
+        ) {
+            super(email, role, name, gender, birthdate);
+
+        }
+    }
+
+    const newPerson = new Person('Sebas', 'M', new Date('1999-06-03'));
+    const userSettings = new UserSettings(
+        '/usr/home',
+        '/home',
+        's@s.com',
+        'Admin',
+        'Fernando',
+        'M',
+        new Date(),
+    )
+    console.log(userSettings);
+})();
+
+```
+
+Para solucionar esto en cierta medida, es posible enviar objetos como argumentos, pues es evidente que este gran numero de parámetros posicionales no es óptimo. 
+
