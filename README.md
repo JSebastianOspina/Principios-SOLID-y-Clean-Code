@@ -597,6 +597,14 @@ class Product {
     console.log(bluePants.toString());
 })();
 ```
+## Comentarios
+"No comentes el código mal escrito, reescríbelo"
+Se deben evitar a toda costa, pues el código debe ser suficientemente autoexplicativo.  Sin embargo, cuando usamos librerías de terceros, APIS, frameworks, nos encontraremos ante situaciones en las que escribir un comentario será mejor que dejar una solución compleja o un hack sin explicación. 
+
+Se debe comentar **¿El por qué?** en lugar del **¿Qué o ¿cómo?**
+
+## Uniformidad en el proyecto
+Ante problemas similares, hay que aplicar soluciones similares.  Esto aplica para el codigo, la estructura de las carpetas, el nombre de los archivos. También debe identarse de misma manera. 
 
 ## Clases
 ### Estrucura recomendada para las clases
@@ -794,3 +802,47 @@ Para solucionar esto en cierta medida, es posible enviar objetos como argumentos
 
 Sin embargo, esto aún no cumple el principio de responsabilidad única, ademas de que siempe se debe **priorizar la composición frente a la herencia**
 Para solucionarlo, se pueden crear clases de tipo "composisicón" que se encarguen de relacionar estas dos clases. 
+
+
+# STUPID
+Hmm, huele feo... ¿Que será? es un acromico para referirse a 6 Code Smells
+Singleton: patrón singleton
+Tight Coupling: alto acoplamiento
+Untestability: Codigo no probable (unit test) 
+Premature optimization: optimizaciones prematuras
+Indescriptive Naming: nombres pocos descriptivos
+Duplication: duplicidad de código, no aplicar el principio DRY.
+
+## Singleton
+Hace referencia a el uso del patrón singleton.
+### Pros
+Garantiza una única instancia de la clase a lo largo de toda la aplicación. 
+### Contras
+- Vive en el contexto global.
+- Puede ser modificado por cualquiera en cualquier momento, lo que lo hace no rastreable.
+- Dificil de testear debido a su ubicación.
+
+## Tight Coupling: alto acoplamiento
+"Queremos diseñar componentes que sean auto-contenidos, auto suficientes e independientes. Con un objetivo y un propósito bien definido". - The pragmatic Programmer.
+Lo ideal es tener bajo acoplamiento y una buena cohesión. 
+
+**Cohesión** se refiere a lo que la clase (o modulo) puede hacer. 
+La baja cohesion significaría que la clase realiza una gran variedad de acciones: es amplia: no se enfoca en lo que debe hacer. 
+Alta cohesión significa que la clase se enfoca en lo que debería estar haciendo, es decir, solo métodos relacionados con la intención de la clase. 
+
+**Acoplamiento** cuán relacionadas o dependientes son dos clases o modulos entre si. 
+En **bajo acoplamiento** cambiar algo importante en una clase no debería afectar a la otra.
+**En alto acoplamiento** dificultará el cambio y el mantenimiento de su código; dado que las clases están muy unidas, hacer un cambio podría requerir una renovación completa del sistema. 
+
+![imagen](https://user-images.githubusercontent.com/55632072/218197386-ce94238d-f512-4a50-ab8f-f2888f5affb8.png)
+
+### Desventajas
+- Un cambio en un modulo por lo general rpovoca un efecto domino de los cambios en otros modulos.
+- El ensamblaje de modulos puede requerir mas esfuerzo y tiempo debido a la mayor dependencia entre modulos.
+- Un módulo en particular puede ser mas dificil de reutilizar y/o problar porque se deben incluir módulos dpeendientes. 
+
+### Posibles soluciones
+- A tiene un atributo que se refiere a B
+- A llama a los servicios de un objeto B
+- A tiene un método que hace referencia a B (a través del tipo de retorno o parámetro)
+- A es una subclase de (o implementa) la clase B.
